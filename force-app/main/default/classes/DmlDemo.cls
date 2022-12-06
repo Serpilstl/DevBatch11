@@ -96,6 +96,23 @@ public  class DmlDemo {
 
         
     }
+    public static void dmlInsertMultiple_right1(){
+        List<Account> listAcc=[select id,name,active__c from account ];
+        List<Account> updateAccount= new List<Account>();
+        for (account acc : listAcc) {
+            if (acc.Active__c == 'Yes') {
+                acc.Name = acc.Name + ' via B.0';
+                updateAccount.add(acc);
+            }
+        }
+        if (!updateAccount.isEmpty()) {
+            update updateAccount;
+        }
+        
+
+
+    }
+
     
 
 }
