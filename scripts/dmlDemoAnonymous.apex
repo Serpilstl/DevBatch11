@@ -7,3 +7,5 @@ DmlDemo.dmlInsertDemo_5();
 DmlDemo.dmlInsertMultiple_right();
 DmlDemo.dmlInsertMultiple_right2();
 DmlDemo.dmlInsertMultiple_right1();
+
+ delete[select id from account where createddate =THIS_WEEK];
