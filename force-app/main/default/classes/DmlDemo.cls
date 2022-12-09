@@ -62,15 +62,15 @@ public  class DmlDemo {
         List<account>listAcc=new list<account>();
 
         account acc1=new account();
-        acc1.Name='bulk acc 1';
+        acc1.Name='My Account 1';
         listAcc.add(acc1);
          
         account acc2=new account();
-        acc2.Name='bulk acc2 ';
+        acc2.Name='My account 2 ';
         listAcc.add(acc2);
 
         account acc3=new account();
-        acc3.Name='bulk acc3 ';
+        acc3.Name='My account 3 ';
         listAcc.add(acc3);
 
         insert listAcc;
