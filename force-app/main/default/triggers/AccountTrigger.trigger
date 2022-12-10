@@ -1,5 +1,22 @@
 trigger AccountTrigger on Account (before insert,before update, after insert, after update) {
     List<Account> accTriggerNew = trigger.new;
+    if(Trigger.isBefore && Trigger.isUpdate){
+        system.debug('BEFORE UPDATE new record ==> '+accTriggerNew);
+        system.debug('BEFORE UPDATE new account size==>'+ accTriggerNew.size());
+        for(account eachAcc : accTriggerNew){
+            system.debug('BEFORE UPDATE each acc id is '+eachAcc.id+ ' ,each name is '+eachacc.Name);
+        }
+    }
+    if (Trigger.isAfter && Trigger.isUpdate) {
+        system.debug('AFTER newly UPDATE record ==>'+ trigger.new);
+        system.debug('AFTER newly UPDATE accounts size '+accTriggerNew.size());
+        for (account eachAcc : accTriggerNew){
+            system.debug('AFTER UPDATE acc id is '+eachAcc.Id + 'each acc name is '+eachacc.Name);
+        }
+    }
+
+
+}
     /*
     if(Trigger.isBefore && Trigger.isInsert){
         system.debug('BEFORE INSERT new record ==> '+accTriggerNew);
@@ -47,20 +64,4 @@ system.debug('account after the  trigger called');
         system.debug('After UPDATE trigger');
     }
     */
-    if(Trigger.isBefore && Trigger.isUpdate){
-        system.debug('BEFORE INSERT new record ==> '+accTriggerNew);
-        system.debug('BEFORE INSERT new account size==>'+ accTriggerNew.size());
-        for(account eachAcc : accTriggerNew){
-            system.debug('BEFORE each acc id is '+eachAcc.id+ ' ,each name is '+eachacc.Name);
-        }
-    }
-    if (Trigger.isAfter && Trigger.isUpdate) {
-        system.debug('newly inserted record ==>'+ trigger.new);
-        system.debug('inserted account size '+accTriggerNew.size());
-        for (account eachAcc : accTriggerNew){
-            system.debug('each acc id is '+eachAcc.Id + 'each acc name is '+eachacc.Name);
-        }
-    }
-
-
-}
+    
