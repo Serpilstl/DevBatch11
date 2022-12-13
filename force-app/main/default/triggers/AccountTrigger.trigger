@@ -1,5 +1,14 @@
 trigger AccountTrigger on Account (before insert,before update, after insert, after update) {
-     
+   if(Trigger.isBefore){
+      AccountTriggerHandler.updateDescription(Trigger.New,Trigger.Old,Trigger.NewMap,Trigger.OldMap);
+   }
+
+
+
+
+
+
+     /*
     if (trigger.isAfter && trigger.isUpdate) {
         system.debug('after update trigger');
 
