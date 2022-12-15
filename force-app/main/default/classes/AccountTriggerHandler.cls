@@ -1,4 +1,58 @@
 public class AccountTriggerHandler {
+    public static void updateVIPforContacts(List<Account> accTriggerNew, List<account> accTriggerOld,Map<id, account> accTriggerNewMap,Map<id, account> accTriggerOldMap){
+
+        set<id> accIds = new set<id>();
+        for (account eachAcc : accTriggerNew) {
+            if(eachAcc.vip__c != accTriggerOldMap.get(eachAcc.id).vip__c){
+                accIds.add(eachAcc.id);
+            }
+            
+        }
+        List<Contact> allContacts = [select id, vip__c,accountId from contact where account.id in :accIds];
+        for(contact eachCon : allContacts){
+            id contactAccId = eachCon.AccountId;
+            Account newAcc = accTriggerNewMap.get(contactAccId);
+            boolean accVIP = newAcc.vip__c;
+            boolean accVIP2 = accTriggerNewMap.get(eachCon.AccountId).vip__c;
+            eachCon.vip__c = accVIP;
+        }
+        update allContacts ;
+            
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+    //create set account ids where only VIP filed is updated
+    //get contacts for all those accounts
+    //get contacts for all those 3 account
+    //for loop on contact 
+    
+
+
+
+
+
+
+
+
+
+
+
+    /*
     public static void updateDescription(List<Account> accTriggerNew, List<account> accTriggerOld,
                                 Map<id, account> accTriggerNewMap, Map<id, account> accTriggerOldMap) {
         for (account eachAcc : accTriggerNew) {
@@ -26,4 +80,5 @@ public class AccountTriggerHandler {
             }
         }
     }
+    */
 }
