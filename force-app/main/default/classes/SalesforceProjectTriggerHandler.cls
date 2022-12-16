@@ -13,4 +13,20 @@ public with sharing class SalesforceProjectTriggerHandler {
         }
 
     }
+    public static void completeSPvalidation(List<Salesforce_Project__c> spTriggerNew,List<Salesforce_Project__c> spTriggerOld,Map<id, Salesforce_Project__c> spTriggerNewMap,Map<id, Salesforce_Project__c> spTriggerOldMap){
+        set<id> spCompletedIds = new set<id> ();
+        for (salesforce_project__c eachSP : spTriggerNew) {
+            if (eachSP.Status__c == 'Completed' && eachSP.Status__c != SpTriggerOldMap.get(eachSP.id).Status__c) {spCompletedIds.add(eachSP.Id);
+                
+            }
+            
+        }
+        List<Salesforce_Ticket__c> listST =[select id, status__c,salesforce_project__c from Salesforce_Ticket__c where Salesforce_Project__c in :spCompletedIds and status__c != 'Completed'];
+        for (Salesforce_Ticket__c eachST  : listST) {
+            Salesforce_Project__c spNew = spTriggerNewMap.get(eachST.Salesforce_Project__c);
+            spNew.addError('Can not complete project because all tickets are not completed.');
+            
+        }
+
+    }
 }
