@@ -1,6 +1,8 @@
 trigger AccountTrigger on Account (before insert, before update, after insert, after update) {
     
-    
+    if (Trigger.isBefore) {
+        AccountTriggerHandler.updateDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+    }
     if (Trigger.isAfter && Trigger.isUpdate) {
         //HERE we call handler method to update all contacts VIP field
         AccountTriggerHandler.updateVIPforContacts(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
@@ -211,3 +213,6 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
     */
     
 }
+
+
+
