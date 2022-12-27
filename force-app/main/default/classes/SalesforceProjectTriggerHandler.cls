@@ -29,4 +29,42 @@ public with sharing class SalesforceProjectTriggerHandler {
         }
 
     }
+    @future 
+    public static void spUpdateDescription(Set< id> setSPId){
+        system.debug('inside future method.Hiii');
+        List< Salesforce_Project__c > allSP = [select id, description__c from Salesforce_Project__c where id in :setSPId];
+        for (salesforce_project__c eachSP : allSP) {
+            eachSP.Description__c += 'Updated from future ';
+            
+        }
+        update allSP;
+    }
+    //a
+    public static void spStatusCompleted(List<Salesforce_Project__c> spTriggerNew,List<Salesforce_Project__c> spTriggerOld,Map<Id, Salesforce_Project__c> spTriggerNewMap,Map<Id, Salesforce_Project__c> spTriggerOldMap){
+        set<id> spCompleted = new set<id> ();
+        for (Salesforce_project__c sp  : spTriggerNew) {
+            if (sp.Status__c == 'Completed' && sp.Status__c != spTriggerOldMap.get(sp.id).Status__c) {
+                spCompleted.add(sp.Id);
+                
+            }
+            
+        }
+        if (!spCompleted.isEmpty()) {
+            updateTicketStatus(spCompleted);
+            
+        }
+
+
+    }
+    @future
+    public static void updateTicketStatus(set<id> ProjectIds){
+        //get all tickets
+        List<Salesforce_Ticket__c> allTickets = [select id, status__c,salesforce_project__c from Salesforce_Ticket__c where Salesforce_Project__c in :ProjectIds and status__c != 'Completed'];
+        for (salesforce_ticket__c eachST : allTickets) {
+            eachST.Status__c =  'Completed';
+
+            
+        }
+        update allTickets;
+    }
 }
