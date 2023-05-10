@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Child to Parent Com. with Parameters">
+        <div class="slds-var-m-around_medium">
+            <lightning-progress-bar
+                  value = {progressValue}
+                  size ="Large">
+            </lightning-progress-bar>
+            <c-c2p-custom-event-parameter-child
+                 onsetprogress = {progressHandle}>
+            </c-c2p-custom-event-parameter-child>
+        </div>
+        <template lwc:if = {flag}>
+            Please enter between 0 - 100
+
+        </template>
+    </lightning-card>
+</template>

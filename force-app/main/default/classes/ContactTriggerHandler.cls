@@ -15,6 +15,7 @@ public class ContactTriggerHandler {
         for(contact eachContact : conTriggerNew){
             contact oldContact = conTriggerOldMap.get(eachContact.id);
             if(eachContact.LeadSource != oldContact.LeadSource){
+                string customError = system.label.ContactValidation2;
                 eachContact.LeadSource.addError('Can not update');
             }
         }

@@ -1,4 +1,4 @@
-public class AccountTriggerHandler {
+public with sharing class AccountTriggerHandler {
     public static void updateDescription(List<Account> accTriggerNew, List<account> accTriggerOld,
                                 Map<id, account> accTriggerNewMap, Map<id, account> accTriggerOldMap) {
         for (account eachAcc : accTriggerNew) {
